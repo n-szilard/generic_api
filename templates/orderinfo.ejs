@@ -1,0 +1,47 @@
+<h1>Rendelés információ</h1>
+<hr>
+<h3>
+    Kedves <%= username %>!
+</h3>
+
+<p>
+    Ön az alábbi tételeket rendelte weboldalunkról:
+</p>
+
+<table style="border: 1px solid black;">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Pizza neve</th>
+            <th>Egységár</th>
+            <th>Mennyiség</th>
+            <th>Összesen</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%
+            let total = 0;
+            pizzas.forEach((item, index) => {
+            total += item.price * item.amount;
+        %>
+            <tr>
+                <td><%= (index+1) %></td>
+                <td><%= item.name %></td>
+                <td><%= item.price %> Ft</td>
+                <td><%= item.amount %> db</td>
+                <td><%= item.price * item.amount %> Ft</td>
+            </tr>
+        <% }); %>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4">Összesen:</td>
+            <td><%= total %> Ft</td>
+        </tr>
+    </tfoot>
+</table>
+<h5>Telefonszám: <%= phone %></h5>
+<h5>Szállítási cím: <%= address %></h5>
+<h5>Fizetési mód: <%= payment %></h5>
+<h5>Szállítási mód: <%= shipping %></h5>
+<h5>Megjegyzés: <%= comment %></h5>

@@ -1,0 +1,21 @@
+CREATE OR REPLACE VIEW cartCounts AS
+SELECT
+	userId,
+    COUNT(*) as cartCount
+FROM carts
+GROUP BY userId
+
+
+CREATE VIEW carts_vt AS
+SELECT
+	carts.id as id,
+	carts.userId as userId,
+    users.name as userName,
+    carts.pizzaId as pizzaId,
+    pizzas.name as pizzaName,
+    pizzas.price as price,
+    carts.amount as amount,
+    carts.amount * pizzas.price as total
+FROM carts
+INNER JOIN users ON users.id = carts.userId
+INNER JOIN pizzas ON pizzas.id = carts.pizzaId
