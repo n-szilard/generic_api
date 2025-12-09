@@ -6,7 +6,7 @@ var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: '13a_pizzeria'
+    database: process.env.DBNAME
 });
 
 function query(sql, params = [], callback, req = '') {
