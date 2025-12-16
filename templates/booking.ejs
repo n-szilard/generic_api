@@ -89,6 +89,15 @@
 				display: table !important;
 				max-height: none !important;
 			}
+
+			.row-1 .column-1 .block-4.paragraph_block td.pad>div {
+				text-align: left !important;
+				font-size: 16px !important;
+			}
+
+			.row-1 .column-1 .block-4.paragraph_block td.pad {
+				padding: 10px !important;
+			}
 		}
 	</style><!--[if mso ]><style>sup, sub { font-size: 100% !important; } sup { mso-text-raise:10% } sub { mso-text-raise:-10% }</style> <![endif]-->
 </head>
@@ -109,7 +118,7 @@
 													<table class="heading_block block-1" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
 															<td class="pad">
-																<h1 style="margin: 0; color: #7747FF; direction: ltr; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 38px; font-weight: 700; letter-spacing: normal; line-height: 1.2; text-align: center; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 46px;"><span class="tinyMce-placeholder" style="word-break: break-word;">Szállásfoglaló - Sikeres regisztráció</span></h1>
+																<h1 style="margin: 0; color: #7747FF; direction: ltr; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 38px; font-weight: 700; letter-spacing: normal; line-height: 1.2; text-align: left; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 46px;"><span class="tinyMce-placeholder" style="word-break: break-word;">Szállásfoglaló - sikeres foglalás</span></h1>
 															</td>
 														</tr>
 													</table>
@@ -118,8 +127,7 @@
 															<td class="pad">
 																<div style="color:#101112;direction:ltr;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:1.2;text-align:left;mso-line-height-alt:19px;">
 																	<p style="margin: 0; margin-bottom: 16px;"><strong>Kedves <%= username %>!</strong></p>
-																	<p style="margin: 0; margin-bottom: 16px;">Köszönjük, hogy regisztrált a szállásfoglaló platformra!<br>Örömmel üdvözlünk.</p>
-																	<p style="margin: 0; margin-bottom: 16px;">Köszönettel: A szállásosok csapata</p>
+																	<p style="margin: 0; margin-bottom: 16px;">Köszönjük a foglalásodat! Örömmel értesítünk, hogy a szállásfoglalásod sikeresen rögzítésre került.</p>
 																	<p style="margin: 0; margin-bottom: 16px;">&nbsp;</p>
 																	<p style="margin: 0;">&nbsp;</p>
 																</div>
@@ -132,19 +140,37 @@
 																<table style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse; width: 100%; table-layout: fixed; direction: ltr; background-color: transparent; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight: 400; color: #101112; text-align: left; letter-spacing: 0px;" width="100%">
 																	<tbody style="vertical-align: top; font-size: 16px; line-height: 1.2; mso-line-height-alt: 19px;">
 																		<tr>
-																			<td width="50%" style="vertical-align: top; padding: 10px; word-break: break-word; border-top: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-left: 1px solid #dddddd;">URL</td>
-																			<td width="50%" style="vertical-align: top; padding: 10px; word-break: break-word; border-top: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-left: 1px solid #dddddd;"><%= url %></td>
+																			<td width="50%" style="vertical-align: top; padding: 10px; word-break: break-word; border-top: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-left: 1px solid #dddddd;">Szállás:</td>
+																			<td width="50%" style="vertical-align: top; padding: 10px; word-break: break-word; border-top: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-left: 1px solid #dddddd;"><%= name %></td>
 																		</tr>
 																		<tr>
-																			<td width="50%" style="vertical-align: top; padding: 10px; word-break: break-word; border-top: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-left: 1px solid #dddddd;">Felhasználónév:</td>
-																			<td width="50%" style="vertical-align: top; padding: 10px; word-break: break-word; border-top: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-left: 1px solid #dddddd;"><%= username %></td>
+																			<td width="50%" style="vertical-align: top; padding: 10px; word-break: break-word; border-top: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-left: 1px solid #dddddd;">Érkezés:</td>
+																			<td width="50%" style="vertical-align: top; padding: 10px; word-break: break-word; border-top: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-left: 1px solid #dddddd;"><%= startDate %></td>
 																		</tr>
 																		<tr>
-																			<td width="50%" style="vertical-align: top; padding: 10px; word-break: break-word; border-top: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-left: 1px solid #dddddd;">Regisztrálva:</td>
-																			<td width="50%" style="vertical-align: top; padding: 10px; word-break: break-word; border-top: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-left: 1px solid #dddddd;"><%= createdAt %></td>
+																			<td width="50%" style="vertical-align: top; padding: 10px; word-break: break-word; border-top: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-left: 1px solid #dddddd;">Távozás:</td>
+																			<td width="50%" style="vertical-align: top; padding: 10px; word-break: break-word; border-top: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-left: 1px solid #dddddd;"><%= endDate %></td>
+																		</tr>
+																		<tr>
+																			<td width="50%" style="vertical-align: top; padding: 10px; word-break: break-word; border-top: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-left: 1px solid #dddddd;">Vendégek száma:</td>
+																			<td width="50%" style="vertical-align: top; padding: 10px; word-break: break-word; border-top: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-left: 1px solid #dddddd;"><%= persons %></td>
+																		</tr>
+																		<tr>
+																			<td width="50%" style="vertical-align: top; padding: 10px; word-break: break-word; border-top: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-left: 1px solid #dddddd;">Végösszeg:</td>
+																			<td width="50%" style="vertical-align: top; padding: 10px; word-break: break-word; border-top: 1px solid #dddddd; border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-left: 1px solid #dddddd;"><%= totalPrice %></td>
 																		</tr>
 																	</tbody>
 																</table>
+															</td>
+														</tr>
+													</table>
+													<table class="paragraph_block block-4" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+														<tr>
+															<td class="pad">
+																<div style="color:#101112;direction:ltr;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:1.2;text-align:left;mso-line-height-alt:19px;">
+																	<p style="margin: 0; margin-bottom: 16px;">Amennyiben kérdésed van, vagy módosítani szeretnél a foglaláson, vedd fel velünk bátran a kapcsolatot.</p>
+																	<p style="margin: 0;">Várunk szeretettel!</p>
+																</div>
 															</td>
 														</tr>
 													</table>
