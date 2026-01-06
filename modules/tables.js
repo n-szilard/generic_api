@@ -83,14 +83,33 @@ router.get('/:table/:field/:op/:value', (req, res) => {
     }, req)
 })
 
-router.post('/upload', upload.single('image'), (req, res) => {
-    if (!req.file) return res.status(500).send({error: 'Nincs fájl feltöltve!'});
+router.post('/upload', upload.array('images', 10), (req, res) => {
+    const insertId = Number(req.body.insertId);
+    const files = req.files;
+
+    if (!files || files.length === 0) {
+        return res.status(500).send({ error: 'Nincs fájl feltöltve!' });
+    }
+
+    for (const file of files) {
+        query(
+            'INSERT INTO accomodation_images (accomodationId, imagePath) VALUES (?, ?)', [insertId, file.filename], (error, results) => {
+                if (error) {
+                    return res.status(500).json({
+                        errno: error.errno,
+                        msg: 'Hiba történt az adatbázis beszúrása közben.',
+                        error: error.message
+                    });
+                }
+            },
+            req
+        );
+    }
 
     res.status(200).send({
-        message: 'Fájl feltölve!',
-        filename: req.file.filename,
-        path: '/uploads'
-    })
+        message: 'Fájlok feltöltve!',
+        count: files.length
+    });
 })
 
 async function renderTemplate(templateName, data) {
