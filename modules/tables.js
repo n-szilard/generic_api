@@ -32,6 +32,15 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
+// get bookings with user id
+router.get('/userbookings/:id', (req, res) => {
+    let userId = req.params.id;
+    query('SELECT bookings.id,userId,accomodationId,startDate,endDate,persons,totalPrice,status, accomodations.name FROM bookings INNER JOIN accomodations ON bookings.accomodationId = accomodations.id WHERE userId = ?;', [userId], (error, results) => {
+        if (error) return res.status(500).json({ errno: error.errno, msg: 'Hiba történt az adatbázis lekérdezése közben.', error: error.message });
+        res.send(results);
+    }, req);
+})
+
 router.get('/ordersall', (req, res) => {
     query('SELECT orders.id,`userId`,`total`,`status`,orders.createdAt,`updatedAt`,GROUP_CONCAT(pizzas.name, " x ", order_items.quantity) as name, order_items.quantity FROM `orders` INNER JOIN order_items ON orders.id = order_items.orderId INNER JOIN pizzas ON order_items.pizzaId = pizzas.id GROUP BY orders.id', [], (error, results) => {
         if (error) return res.status(500).json({ errno: error.errno, msg: 'Hiba történt az adatbázis lekérdezése közben.', error: error.message });
@@ -83,8 +92,8 @@ router.get('/:table/:field/:op/:value', (req, res) => {
     }, req)
 })
 
-router.post('/upload', upload.array('images', 10), (req, res) => {
-    const insertId = Number(req.body.insertId);
+router.post('/upload/:insertId', upload.array('images', 10), (req, res) => {
+    const insertId = req.params.insertId;
     const files = req.files;
 
     if (!files || files.length === 0) {
@@ -92,6 +101,7 @@ router.post('/upload', upload.array('images', 10), (req, res) => {
     }
 
     for (const file of files) {
+        console.log(`INSERT INTO accomodation_images (accomodationId, imagePath) VALUES (${insertId}, ${file.filename})`)
         query(
             'INSERT INTO accomodation_images (accomodationId, imagePath) VALUES (?, ?)', [insertId, file.filename], (error, results) => {
                 if (error) {
